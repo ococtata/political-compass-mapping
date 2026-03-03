@@ -1,0 +1,109 @@
+Results:
+      Model  Accuracy  F1-Score  Precision   Recall      MAE      MSE        R²
+      mBERT  0.750247  0.800630   0.747059 0.862479 0.249753 0.249753 -0.026240
+   IndoBERT  0.753208  0.796417   0.765258 0.830221 0.246792 0.246792 -0.014071
+XLM-RoBERTa  0.752221  0.788898   0.781667 0.796265 0.247779 0.247779 -0.018127
+IndoRoBERTa  0.735439  0.760286   0.803403 0.721562 0.264561 0.264561 -0.087084
+
+Best Model: mBERT 
+
+Reasons:
+- Highest F1-Score (0.8006)
+- Highest Recall (0.8625) - critical for comprehensive ideology mapping
+- Balanced precision-recall trade-off
+- Good generalization (minimal overfitting)
+- Superior handling of multilingual, code-mixed Indonesian-English text
+
+Details:
+1. Highest F1 Score (0.800630)
+- F1-Score is the harmonic mean of precision and recall, making it the most balanced metric for classification tasks
+- mBERT achieved the highest F1-Score, indicating the best overall balance between correctly identifying both classes
+- This is crucial for political ideology classification where both false positives and false negatives matter
+
+2. High Recall (0.862479)
+- mBERT has the highest recall among all models, this means it's best at identifying Libertarian tweets (the positive class)
+- High recall is valuable in political analysis because missing ideological signals (false negatives) can skew political compass visualization
+- With 86.25% recall, mBERT captures most Libertarian-leaning content
+
+3. Balanced Performance
+- While precision (0.7471) is slightly lower than XLM-RoBERTa and IndoRoBERTa, it's still acceptable
+- The trade-off favors recall, which is more important for comprehensive ideological mapping
+- Training-validation gap (0.0595) shows good generalization with minimal overfitting
+
+4. Stable Training Convergence
+Looking at the training history, mBERT showed:
+- Steady improvement across 7 epochs
+- Best F1 at epoch 4 (0.8028)
+- Minimal overfitting (train-val gap is reasonable)
+- Validation F1 remained high and stable (0.80+)
+
+Comparison:
+1. IndoBERT (2nd Place - F1: 0.7964)
+Strengths:
+- Very close second place (only 0.004 behind mBERT)
+- Best accuracy (0.7532) among all models
+- Best MAE (0.2468) and R² (-0.014)
+- As an Indonesian-specific model, it understands local context well
+
+Weaknesses:
+- Slightly lower recall (0.8302) compared to mBERT
+- This means it misses more Libertarian tweets than mBERT
+- For political compass visualization, this could lead to underrepresentation of libertarian positions
+
+Why it's not #1:
+- While IndoBERT is optimized for Indonesian language, dataset contains code-mixed Indonesian-English text with slang
+- mBERT's multilingual training gives it an advantage in handling this language mixing
+- The F1-Score difference (0.004) is small, but mBERT's superior recall makes it more suitable for comprehensive ideological mapping
+
+2. XLM-RoBERTa (3rd Place - F1: 0.7889)
+Strengths:
+- Highest precision (0.7817) - most accurate when predicting Libertarian
+- Lowest false positive rate
+- Good overall accuracy (0.7522)
+- Strong multilingual capabilities (trained on 100 languages)
+
+Weaknesses:
+- Lower recall (0.7963) - misses more true Libertarian tweets
+- This means while its predictions are more precise, it's more conservative in labeling tweets as Libertarian
+- Training stopped early at epoch 6 with signs of validation loss increasing
+
+Why it's not #1:
+- Precision-recall trade-off favors precision too much
+- For political compass visualization, you want to capture as much ideological signal as possible
+- Missing 20% of Libertarian tweets (recall = 0.796) could create blind spots in ideology map
+- RoBERTa architecture is typically better, but in this specific dataset with heavy code-mixing, mBERT performed better
+
+3. IndoRoBERTa (4th Place - F1: 0.7603)
+Strengths:
+- Highest precision (0.8034) - very confident predictions
+- Specialized for Indonesian language
+- Longest training (7 epochs)
+
+Weaknesses:
+
+- Significantly lower recall (0.7216) - misses 28% of Libertarian tweets!
+- This is the worst recall among all models
+- Highest MAE (0.2646) and worst R² (-0.087)
+- Lower overall accuracy (0.7354)
+
+Why it's not #1:
+- Too conservative - trades recall for precision excessively
+- Missing ~28% of Libertarian content is unacceptable for comprehensive ideology mapping
+- While it rarely mislabels Authoritarian tweets as Libertarian, it frequently misses true Libertarian tweets
+- The model appears to be underfitting the Libertarian class
+- Training history shows validation F1 peaked at epoch 4 (0.7967) but dropped to 0.7603 by epoch 7, indicating instability
+
+NOTES:
+1. Negative R² Scores Are Concerning
+- All models have negative R² scores (-0.087 to -0.014)
+- This indicates that treating the problem as regression (continuous coordinates) is problematic
+- Approach of using classification + mapping to coordinates is the right strategy
+- The regression metrics (MAE, MSE, R²) are less relevant than classification metrics (F1, precision, recall)
+
+2.  Recall is Critical for Political Ideology Mapping
+= High recall ensures comprehensive coverage of ideological signals
+- Missing tweets (false negatives) creates gaps in political compass visualization
+
+3. The Precision-Recall Trade-off
+- Models with very high precision (IndoRoBERTa: 0.8034) sacrifice recall
+- For exploratory political analysis, it's better to capture more signals (high recall) than to be overly conservative (high precision)

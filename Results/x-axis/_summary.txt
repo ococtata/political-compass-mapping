@@ -1,0 +1,113 @@
+Results:
+      Model  Accuracy  F1-Score  Precision   Recall   MAE   MSE        R²
+   IndoBERT     0.743  0.776327   0.714744 0.849524 0.257 0.257 -0.030576
+IndoRoBERTa     0.744  0.759850   0.748614 0.771429 0.256 0.256 -0.026566
+XLM-RoBERTa     0.743  0.754067   0.757692 0.750476 0.257 0.257 -0.030576
+      mBERT     0.729  0.698554   0.839572 0.598095 0.271 0.271 -0.086717
+
+Best Model: IndoBERT
+
+Reasons:
+- Highest F1-Score (0.7763) - best overall performance
+- Highest Recall (0.8495) - captures 85% of Right-wing positions
+- Best for Indonesian economic discourse
+- Most stable training (17 epochs, steady improvement)
+- Excellent generalization (low train-val gap)
+- Balanced performance across all metrics
+
+Details:
+1. Highest F1-Score (0.7763)
+- This means it has the best balance between precision and recall
+- Critical for comprehensive economic ideology mapping
+
+2. Highest Recall (0.8495)
+- Highest recall - captures 84.95% of Right-wing economic positions
+- Only misses ~15% of Right-leaning tweets
+- Essential for complete political compass visualization
+- Won't create blind spots in economic axis mapping
+
+3. Indonesian Language Advantage
+- Unlike social axis (where mBERT won), economic discourse benefits from Indonesian-specific training
+- Economic terminology in Indonesian political discourse is more formal and standardized
+- IndoBERT's Indonesian-specific vocabulary captures economic nuances better
+
+4. Stable Training
+- 17 epochs of training with steady improvement
+- Best F1 at epoch 14 (0.7775)
+- Final F1 (0.7763) very close to best, showing stability
+- Minimal train-validation gap (0.0285) = excellent generalization
+
+5. Balanced Performance
+- While precision (0.7147) is slightly lower than competitors, it's acceptable
+- The precision-recall trade-off favors recall, which is better for ideology mapping
+- High recall ensures comprehensive coverage of economic positions
+
+Comparison:
+1. IndoRoBERTa (2nd Place - F1: 0.7598)
+Strengths:
+- Slightly higher accuracy (0.744) - but only 0.1% difference
+- Good precision (0.7486) - fewer false positives
+- Best MAE (0.256) and R² (-0.027) - marginally better regression metrics
+- Specialized for Indonesian language like IndoBERT
+
+Weaknesses:
+- Lower recall (0.7714) - misses 7.8% more Right-wing tweets than IndoBERT
+- This means it's more conservative in identifying Right-wing economic positions
+- The recall gap (84.95% vs 77.14%) translates to missing nearly 8% of economic Right signals
+
+Why it's not #1:
+- While IndoRoBERTa has higher precision, the recall difference is significant for comprehensive ideology mapping
+- Missing 8% more Right-wing tweets would create noticeable gaps in  political compass visualization
+- For exploratory political analysis, capturing more ideological signals (high recall) is more valuable than being overly precise
+- IndoBERT's F1-Score is 1.7% higher, indicating better overall balance
+
+
+2. XLM-RoBERTa (3rd Place - F1: 0.7541)
+Strengths:
+- Similar accuracy (0.743) to IndoBERT
+- Highest precision (0.7577) among the top 3 models - most accurate when predicting Right-wing
+- Strong multilingual capabilities (trained on 100 languages)
+- Good overall performance metrics
+
+Weaknesses:
+- Significantly lower recall (0.7505) - misses 9.9% more Right-wing tweets than IndoBERT
+- This means while its predictions are more precise, it's too conservative in labeling tweets as Right-wing
+- Training showed early overfitting - stopped at epoch 8 after peaking at epoch 6
+- Validation F1 peaked at 0.8000 (epoch 6) but dropped to 0.7541 by epoch 8 - a 4.6% decline
+
+Why it's not #1:
+- The recall gap is substantial: XLM-RoBERTa captures only 75% of Right-wing tweets vs IndoBERT's 85%
+- Missing 1 in 4 Right-wing economic positions is unacceptable for comprehensive ideology mapping
+- Multilingual training doesn't provide advantage here - economic discourse is less code-mixed than social discourse
+- Economic language in Indonesian politics uses standard Indonesian terms, not heavy multilingual mixing
+- Training instability - the 4.6% F1 drop after epoch 6 indicates overfitting issues
+
+
+3. mBERT (4th Place - F1: 0.6986)
+Strengths:
+- Highest precision (0.8396) - very confident predictions, lowest false positive rate
+- When mBERT says "Right-wing," it's correct 84% of the time
+- Best performer on social axis (won that competition)
+
+Weaknesses:
+- Extremely low recall (0.5981) - misses 40% of Right-wing economic tweets
+- Highest MAE (0.271) and worst R² (-0.087) - poorest regression-like performance
+- Lower overall accuracy (0.729) compared to other models
+- Largest training-validation gap (0.0853) - shows overfitting
+
+Why it's not #1:
+- Catastrophic recall failure - only captures 3 out of 5 Right-wing tweets
+- Missing 40% of economic Right positions would create massive blind spots in political compass
+- While high precision (83.96%) means fewer false positives, being too conservative creates severe bias
+- The model is underconfident - only predicts Right when extremely certain
+- This would artificially shift political compass leftward, misrepresenting the ideological distribution
+
+NOTES:
+1. Why We Prefer High Recall
+- Missing ideological signals (false negatives) creates systematic gaps in political compass
+- False positives distribute randomly and don't create systematic bias
+- Aggregate visualization smooths out individual prediction errors
+- High recall ensures comprehensive representation of ideological spectrum
+- Exploratory research benefits from inclusiveness over conservatism
+
+2. Negative R² Scores Are Concerning (same as it is in y-axis)
