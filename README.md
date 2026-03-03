@@ -22,8 +22,8 @@ transformer-based classifiers for the economic (left-right) and social
 │       ├── MITweet_Auth_Lib.csv         # Labeled social axis dataset
 │       └── MITweet_Translated_Slang.csv # Constructed social axis dataset
 └── Results/
-    ├── x-axis/                         # Economic axis training outputs
-    └── y-axis/                         # Social axis training outputs
+    ├── x-axis/                          # Economic axis training outputs
+    └── y-axis/                          # Social axis training outputs
 ```
 
 ## Dataset Construction Pipeline
