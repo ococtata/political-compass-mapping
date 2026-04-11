@@ -65,7 +65,22 @@ scipy
 - All hyperparameters are documented in the training notebooks
 
 ## Citation
-[To be added upon acceptance]
+```
+@inproceedings{sandriago2026mapping,
+  title     = {Mapping Political Ideologies on Social Media Using Text Mining and Deep Learning},
+  author    = {Sandriago, Octavius and Gani, Jonathan Christopher and Sagala, Noviyanti Tri Maretta and Wulandhari, Lili Ayu},
+  booktitle = {Proceedings of the International Conference on Current Research in Artificial Intelligence and Data Science (ICCRAIDS)},
+  year      = {2026},
+  address   = {Jakarta, Indonesia},
+  note      = {Bina Nusantara University}
+}
+```
+
+**APA**
+Sandriago, O., Gani, J. C., Sagala, N. T. M., & Wulandhari, L. A. (2026). 
+Mapping Political Ideologies on Social Media Using Text Mining and Deep Learning. 
+In Proceedings of the International Conference on Current Research in 
+Artificial Intelligence and Data Science (ICCRAIDS). Jakarta, Indonesia.
 
 ## License
 This repository is released for academic research purposes only.
