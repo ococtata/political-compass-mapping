@@ -65,9 +65,7 @@ scipy
 - All hyperparameters are documented in the training notebooks
 
 ## Citation
-
-> Paper accepted at ICCRAIDS 2026. Pending IEEE Xplore® indexing.
-> Citation will be updated upon publication.
+> O. Sandriago, J. C. Gani, L. A. Wulandhari and N. T. M. Sagala, "Mapping Political Ideologies on Social Media Using Text Mining and Deep Learning," 2026 International Conference on Current Research in Artificial Intelligence and Data Science (ICCRAIDS), Banyumas, Indonesia, 2026, pp. 1-6, doi: 10.1109/ICCRAIDS67816.2026.11519643. keywords: {Modeling;Labeling;Compass;Social networking (online);Visualization;Multilingual;Transformers;Printing;Accuracy;Training;text mining;deep learning;political ideology;political compass;ideology mapping},
 
 ## License
 This repository is released for academic research purposes only.
